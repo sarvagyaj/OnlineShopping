@@ -53,23 +53,16 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
+                   
                     <li>
-                        <a class="page-scroll" href="services.html">Services</a>
+                        <a class="page-scroll" href="addProduct">Add Product</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="catalogue">Portfolio</a>
+                        <a class="page-scroll" href="addCatalog">Add Catalog</a>
                     </li>
-                    <li>
-                        <a class="page-scroll" href="about.html">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="products.html">Team</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="contact.html">Contact</a>
-                    </li>
+                  
                      <li>
-                        <a class="page-scroll" href= "user/signin" >Sign In / Sign Up</a>
+                        <a class="page-scroll" href= "signin" >Sign In / Sign Up</a>
                     </li>
                 </ul>
             </div>
@@ -84,7 +77,7 @@
             <div class="intro-text">
                 <div class="intro-lead-in">Welcome To Our Store!</div>
                 <div class="intro-heading">It's Nice To Meet You</div>
-                <a href="catalogue.html" class="page-scroll btn btn-xl">View Store</a>
+                <a href="store" class="page-scroll btn btn-xl">View Store</a>
             </div>
         </div>
     </header>

@@ -1,21 +1,9 @@
 package edu.sjsu.cmpe282.resources;
 
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import com.sun.jersey.api.view.Viewable;
-
 import edu.sjsu.cmpe282.dao.UserDao;
 import edu.sjsu.cmpe282.dto.User;
 
-@Path("/user")
 public class UserResource {
 	
 	private UserDao userDao; 
@@ -24,14 +12,14 @@ public class UserResource {
 		userDao = new UserDao();
 	}
 	
-	@GET
+/*	@GET
 	@Path("/signin")
 	@Produces("text/html")
 	public Response signInPage() {
 		 return Response.ok(new Viewable("/signin")).build();
-	}
+	}*/
 	
-	@POST
+/*	@POST
 	@Path("/signin")
 	@Produces("text/html")
 	public Response signIn(@FormParam("userid") String userid,
@@ -50,8 +38,32 @@ public class UserResource {
 		userDao.addUser(user);
 		String result = "User saved : " + user.getFirstName();
 		return Response.status(201).entity(result).build();
-	}
+	}*/
 
 	
+	public String[] signIn( String userid,
+			String password) {
+		String[] result= new String[2];
+		if(userDao.login(userid, password)) {
+			result[1] = "Hello, "+userDao.getFirstName(userid);
+			result[0] = "/catalogue";
+			return result;
+		}
+		result[0]="/signin";
+		result[1] = "Incorrect username/password";
+		return result;
+	}
+	
+	public String[] signUp(User user) {
+		String[] result = new String[2];
+		if(userDao.addUser(user)) {
+			result[1] = "Hello, "+user.getFirstName();
+			result[0] = "/catalogue";
+			return result;
+		}
+		result[0]="/signup";
+		result[1] = "Invalid information ";
+		return result;
+	}
 	
 }

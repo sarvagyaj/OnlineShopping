@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import edu.sjsu.cmpe282.constants.Constants;
-import edu.sjsu.cmpe282.database.DBConnection;
+import edu.sjsu.cmpe282.database.MySQLConnection;
 import edu.sjsu.cmpe282.dto.User;
 
 public class UserDao {
@@ -18,7 +18,7 @@ public class UserDao {
 
 	public boolean addUser(User user) {
 		try {
-			connection = DBConnection.getInstance().getConnection();
+			connection = MySQLConnection.getInstance().getConnection();
 			statement = connection.createStatement();
 			String query = "INSERT INTO `"+Constants.SCHEMA_NAME+"`.`user` (`first_name`, `last_name`, `email_id`, `password`) VALUES ('"
 					+ user.getFirstName()
@@ -42,22 +42,7 @@ public class UserDao {
 		}
 		return false;
 		
-	/*	try {
-			connection = DBConnection.getInstance().getConnection();
-			statement = connection.createStatement();
-			String query = "INSERT INTO `"+Constants.SCHEMA_NAME+"`.`user` (`first_name`, `last_name`, `email_id`, `password`) VALUES ('"
-					+ user.getFirstName()
-					+ "', '"
-					+ user.getLastName()
-					+ "', '"
-					+ user.getEmail()
-					+ "', '"
-					+ user.getPassword()
-					+ "');";
-			statement.executeUpdate(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}*/
+	
 		
 		
 	}
@@ -65,7 +50,7 @@ public class UserDao {
 	 public boolean validatePassword(String userid, String password){
 		  String originalPassword = null;
 		  	try {
-		  		connection = DBConnection.getInstance().getConnection();
+		  		connection = MySQLConnection.getInstance().getConnection();
 		  		preparedStatement = connection.prepareStatement("Select password from `"+Constants.SCHEMA_NAME +"`.`user` where email_id=?");
 		  		preparedStatement.setString(1, userid);
 		  		resultSet=preparedStatement.executeQuery();
@@ -84,8 +69,8 @@ public class UserDao {
 	 public String getFirstName(String userid){
 		  String firstName = null;
 		  	try {
-		  		connection = DBConnection.getInstance().getConnection();
-		  		preparedStatement = connection.prepareStatement("Select first_name from '"+Constants.SCHEMA_NAME+"'.'user' where email_id=?");
+		  		connection = MySQLConnection.getInstance().getConnection();
+		  		preparedStatement = connection.prepareStatement("Select first_name from `"+Constants.SCHEMA_NAME+"`.`user` where email_id=?");
 		  		preparedStatement.setString(1, userid);
 		  		resultSet=preparedStatement.executeQuery();
 		  	
@@ -96,5 +81,22 @@ public class UserDao {
 		  		}
 
 		  		return firstName;
+		  }
+	 
+	 public User getUser(String userid){
+		  User user = null;
+		  	try {
+		  		connection = MySQLConnection.getInstance().getConnection();
+		  		preparedStatement = connection.prepareStatement("Select first_name,last_name, password from `"+Constants.SCHEMA_NAME+"`.`user` where email_id=?");
+		  		preparedStatement.setString(1, userid);
+		  		resultSet=preparedStatement.executeQuery();
+		  	
+		  		resultSet.next();
+		  		user = new User(resultSet.getString("first_name"),resultSet.getString("last_name"),userid,resultSet.getString("password"));
+		  		} catch (SQLException e) {
+		  			e.printStackTrace();
+		  		}
+
+		  		return user;
 		  }
 }

@@ -860,3 +860,11 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: #fed136;
 }
+
+
+#form label.error {
+color:red;
+}
+#form input.error {
+border:1px solid red;
+}

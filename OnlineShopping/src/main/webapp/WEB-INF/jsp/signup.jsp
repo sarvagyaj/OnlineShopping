@@ -1,3 +1,6 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +21,7 @@
     <link href="css/agency.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="font/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -86,29 +89,45 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Sign In </h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">Sign Up </h2>
+                    <h3 class="section-subheading text-muted">To Register, please enter your information </h3>
                 </div>
 							<hr>
 							
-							<form>
-								<div class="top-margin">
-									<label>Username/Email <span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
+							<form id="form" method="post" action="signup">
+							<div class="top-margin">
+									<label>First Name</label>
+									<input type="text" name ="firstName" class="form-control">
 								</div>
 								<div class="top-margin">
-									<label>Password <span class="text-danger">*</span></label>
-									<input type="password" class="form-control">
+									<label>Last Name</label>
+									<input type="text" name="lastName" class="form-control">
 								</div>
+								<div class="top-margin">
+									<label>Email Address <span class="text-danger">*</span></label>
+									<input type="text" name="email" required class="form-control">
+								</div>
+
+								<div class="row top-margin">
+									<div class="col-sm-6">
+										<label>Password <span class="text-danger">*</span></label>
+										<input type="text" name="password" required id="password" class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Confirm Password <span class="text-danger">*</span></label>
+										<input type="text" name="confirmPassword" required id="confirmPassword" class="form-control">
+									</div>
+								</div>
+								
+								
+								
 
 								<hr>
 
 								<div class="row">
-									<div class="col-lg-8">
-										<b><a href="">Forgot password?</a></b>
-									</div>
-									<div class="col-lg-4 text-right">
-										<button class="btn btn-action" type="submit">Sign in</button>
+									
+									<div class="col-lg-7 text-right">
+										<button class="btn btn-default" type="submit">Sign in</button>
 									</div>
 								</div>
 							</form>
@@ -139,11 +158,10 @@
     <script src="js/classie.js"></script>
     
 
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="js/agency.js"></script>
+    
+    <script src="js/jquery.validate.min.js"></script>
+	<script src="js/validation.js"></script>
     </body>
     </html>
+    

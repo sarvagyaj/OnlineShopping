@@ -7,12 +7,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class DBConnection {
+public class MySQLConnection {
 
-	private static DBConnection connection;
+	private static MySQLConnection connection;
 	private DataSource dataSource;
 
-	private DBConnection(String jndiname) {
+	private MySQLConnection(String jndiname) {
 		try {
 			dataSource = (DataSource) new InitialContext()
 					.lookup("java:comp/env/" + jndiname);
@@ -22,11 +22,11 @@ public class DBConnection {
 		}
 	}
 
-	public static DBConnection getInstance() {
+	public static MySQLConnection getInstance() {
 		if (connection == null) {
-			synchronized (DBConnection.class) {
+			synchronized (MySQLConnection.class) {
 				if (connection == null) {
-					connection = new DBConnection("jdbc/db");
+					connection = new MySQLConnection("jdbc/db");
 				}
 			}
 		}

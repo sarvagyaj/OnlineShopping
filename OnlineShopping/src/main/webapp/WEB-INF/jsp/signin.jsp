@@ -15,13 +15,13 @@
     <title>Agency - Start Bootstrap Theme</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../css/agency.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../font/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="font/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -90,7 +90,8 @@
 						<div class="panel-body">
 							<div class="col-lg-12 text-center">
                     <h2 class="section-heading">Sign In </h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">If you are not registered, click here to <a href="signup">Register</a> </h3>
+                    <h4>${it}</h4>
                 </div>
 							<hr>
 							
@@ -107,10 +108,8 @@
 								<hr>
 
 								<div class="row">
-									<div class="col-lg-8">
-										<b><a href="">Forgot password?</a></b>
-									</div>
-									<div class="col-lg-4 text-right">
+									
+									<div class="col-lg-7 text-right">
 										<button class="btn btn-default" type="submit">Sign in</button>
 									</div>
 								</div>
@@ -132,21 +131,21 @@
 			<!-- /Article -->
 
 			     <!-- jQuery Version 1.11.0 -->
-    <script src="../js/jquery-1.11.0.js"></script>
+    <script src="js/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="../js/classie.js"></script>
+    <script src="js/classie.js"></script>
     
 
     <!-- Contact Form JavaScript -->
-    <script src="../js/jqBootstrapValidation.js"></script>
+    <script src="js/jqBootstrapValidation.js"></script>
     
 
     <!-- Custom Theme JavaScript -->
-    <script src="../js/agency.js"></script>
+    <script src="js/agency.js"></script>
     </body>
     </html>

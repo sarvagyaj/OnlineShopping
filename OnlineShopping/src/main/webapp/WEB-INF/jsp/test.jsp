@@ -14,6 +14,7 @@
     <c:forEach var="item" items="${it.items}">
         ${item}<br />
     </c:forEach>
+    
   </p>
 </body>
 </html>
