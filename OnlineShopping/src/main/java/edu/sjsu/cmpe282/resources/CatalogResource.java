@@ -21,7 +21,7 @@ public class CatalogResource {
 		
 	}
 	
-	public List<Catalog> viewStore() {
+	public List<Catalog> getAllCatalogs() {
 		CatalogDao catalogDao = new CatalogDao();
 		List<Catalog> catalog_entry=catalogDao.viewStore();
 		return catalog_entry;

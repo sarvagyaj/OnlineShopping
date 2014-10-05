@@ -6,12 +6,16 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.sun.jersey.api.view.Viewable;
 
 import edu.sjsu.cmpe282.dto.Catalog;
+import edu.sjsu.cmpe282.dto.Product;
 import edu.sjsu.cmpe282.dto.User;
 
 @Path("/")
@@ -97,11 +101,46 @@ public class WelcomeResource {
 	}
 
 	@GET
+	@Path("allCatalogs")
+	@Produces("application/json")
+	public List<Catalog> getAllCatalogs() {
+		CatalogResource catalogResource = new CatalogResource();
+		List<Catalog> resource = catalogResource.getAllCatalogs();
+		return resource;
+	}
+
+	@GET
 	@Path("store")
 	@Produces("text/html")
 	public Response viewStorePage() {
 		CatalogResource catalogResource = new CatalogResource();
-		List<Catalog> resource = catalogResource.viewStore();
-		return Response.ok(new Viewable("/store",resource)).build();
+		List<Catalog> resource = catalogResource.getAllCatalogs();
+		return Response.ok(new Viewable("/store", resource)).build();
 	}
+
+	@GET
+	@Path("viewProducts")
+	@Produces("text/html")
+	public Response viewProductsPage(
+			@QueryParam("catalogName") String catalogName) {
+		ProductResource productResource = new ProductResource();
+		List<Product> resource = productResource.viewProducts(catalogName);
+		return Response.ok(new Viewable("/viewProducts", resource)).build();
+	}
+
+	@POST
+	@Path("addToCart/{user_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean addToCart(@PathParam("user_id") String userId,
+			@QueryParam("cata") String catalogName,
+			@QueryParam("product_id") int productId,
+			@QueryParam("quan") int quantity) {
+		ShoppingCartResource shoppingCart = new ShoppingCartResource();
+		shoppingCart.addProductToCart(userId, catalogName, productId, quantity);
+		return true;
+
+	}
+
+	
+
 }

@@ -1,6 +1,12 @@
 package edu.sjsu.cmpe282.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.sjsu.cmpe282.dao.CatalogDao;
 import edu.sjsu.cmpe282.dao.ProductDao;
+import edu.sjsu.cmpe282.dto.Catalog;
+import edu.sjsu.cmpe282.dto.Product;
 
 
 
@@ -16,7 +22,13 @@ public class ProductResource {
 		}
 		result[0]="/addProduct";
 		result[1]="Sorry. Error in adding product.";
-		return result;
+		return result;	
+	}
+	
+	public List<Product> viewProducts(String catalogName) {
+		ProductDao productDao = new ProductDao();
+		List<Product> productList = productDao.getProducts(catalogName);
+		return productList;
 		
 	}
 	

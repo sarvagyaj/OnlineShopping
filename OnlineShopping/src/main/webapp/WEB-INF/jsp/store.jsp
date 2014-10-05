@@ -93,25 +93,19 @@
 			</div>
 
 			<c:forEach var="item" items="${it}">
-			<div class="row">
-				<div class="col-md-4 col-sm-6 portfolio-item">
-					<a href="" class="portfolio-link"
-						data-toggle="modal">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content">
-								<i class="fa fa-plus fa-3x"></i>
-							</div>
-						</div> <a href="signup"><img src="img/portfolio/roundicons.png" class="img-responsive"
-						alt=""></a>
-					</a>
-					<div class="portfolio-caption">
-						<h4>${item.catalogName}</h4>
-						<p class="text-muted">${item.catalogDesc}</p>
+				<div class="row">
+					<div class="col-md-4 col-sm-6 portfolio-item">
+						<a href="viewProducts?catalogName=${item.catalogName}"><img src="img/portfolio/roundicons.png"
+							class="img-responsive" alt=""></a>
+
+						<div class="portfolio-caption">
+							<h4>${item.catalogName}</h4>
+							<p class="text-muted">${item.catalogDesc}</p>
+						</div>
 					</div>
-				</div>
-				</c:forEach>
+				
+			</c:forEach>
 			</div>
-		</div>
 	</section>
 
 
