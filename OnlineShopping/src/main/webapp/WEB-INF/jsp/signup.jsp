@@ -111,11 +111,11 @@
 								<div class="row top-margin">
 									<div class="col-sm-6">
 										<label>Password <span class="text-danger">*</span></label>
-										<input type="text" name="password" required id="password" class="form-control">
+										<input type="password" name="password" required id="password" class="form-control">
 									</div>
 									<div class="col-sm-6">
 										<label>Confirm Password <span class="text-danger">*</span></label>
-										<input type="text" name="confirmPassword" required id="confirmPassword" class="form-control">
+										<input type="password" name="confirmPassword" required id="confirmPassword" class="form-control">
 									</div>
 								</div>
 								

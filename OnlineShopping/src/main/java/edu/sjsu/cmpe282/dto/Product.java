@@ -1,13 +1,9 @@
 package edu.sjsu.cmpe282.dto;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
-@DynamoDBTable(tableName="product")
+
 public class Product {
-	private long productID;
+	private int productID;
 	private String prodName;
 	private String desc;
 	private float price;
@@ -17,7 +13,7 @@ public class Product {
 	public Product() {
 	}
 	
-	public Product( String catalogName,long productID, float price,String desc, String prodName,
+	public Product( String catalogName,int productID, float price,String desc, String prodName,
 			int quantity) {
 		this.productID=productID;
 		this.prodName=prodName;
@@ -27,7 +23,7 @@ public class Product {
 		this.catalogName = catalogName;
 	}
 
-	@DynamoDBHashKey(attributeName="catalog_name") 
+	
 	public String getCatalogName() {
 		return catalogName;
 	}
@@ -35,15 +31,15 @@ public class Product {
 		this.catalogName = catalogName;
 	}
 	
-	@DynamoDBRangeKey(attributeName="product_id")
-	public long getProductID() {
+	
+	public int getProductID() {
 		return productID;
 	}
-	public void setProductID(long productID) {
+	public void setProductID(int productID) {
 		this.productID = productID;
 	}
 
-	@DynamoDBAttribute(attributeName="product_name")
+	
 	public String getProdName() {
 		return prodName;
 	}
@@ -51,7 +47,7 @@ public class Product {
 		this.prodName = prodName;
 	}
 
-	@DynamoDBAttribute(attributeName="product_desc")
+	
 	public String getDesc() {
 		return desc;
 	}
@@ -59,7 +55,7 @@ public class Product {
 		this.desc = desc;
 	}
 
-	@DynamoDBAttribute(attributeName="price")
+	
 	public float getPrice() {
 		return price;
 	}
@@ -67,7 +63,7 @@ public class Product {
 		this.price = price;
 	}
 
-	@DynamoDBAttribute(attributeName="quantity")
+	
 	public int getQuantity() {
 		return quantity;
 	}

@@ -34,12 +34,7 @@
 	href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'
 	rel='stylesheet' type='text/css'>
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
 
 </head>
 
@@ -56,8 +51,8 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand page-scroll" href="index.html">Start
-					Bootstrap</a>
+				<a class="navbar-brand page-scroll" href="index.html">Shop
+					Online</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,12 +60,12 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="services.html">Services</a></li>
-					<li><a class="page-scroll" href="catalogue.html">Portfolio</a>
-					</li>
-					<li><a class="page-scroll" href="about.html">About</a></li>
-					<li><a class="page-scroll" href=products.html>Team</a></li>
-					<li><a class="page-scroll" href="contact.html">Contact</a></li>
+
+					<li><a class="page-scroll" href="addProduct">Add Product</a></li>
+					<li><a class="page-scroll" href="addCatalog">Add Catalog</a></li>
+					<li><a class="page-scroll" href="viewCart?user_id=sar">My
+							Shopping Cart</a></li>
+					<li><a class="page-scroll" href="signin">Sign In / Sign Up</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -83,40 +78,56 @@
 			<div class="row">
 
 
-				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+				<div class="col-md-12 col-md-offset-1 col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="col-lg-12 text-center">
-								<h2 class="section-heading">Sign In</h2>
-								<h3 class="section-subheading text-muted">
-									If you are not registered, click here to <a href="signup">Register</a>
-								</h3>
-								<h4>${it}</h4>
+								<h2 class="section-heading">My Purchase History</h2>
+								<h3 class="section-subheading text-muted"></h3>
+								<div class="table-responsive">
+									<c:forEach var="cart" items="${it}">
+										<div style="text-align: left;">
+											<h3 class="section-subheading text-muted">${cart.purchaseDate}</h3>
+										</div>
+
+										<table id="cartTable" class="table table-bordered">
+											<thead>
+												<tr>
+
+													<th>Product Name</th>
+													<th>Price</th>
+													<th>Quantity</th>
+													<th>Total</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="item" items="${cart.products}">
+													<tr data-id="${item.productID}" data-quan="1"
+														data-catalog="${item.catalogName}">
+														<td>${item.prodName}</td>
+														<td>${item.price}</td>
+														<td>${item.quantity}</td>
+														<c:set var="result" value="${item.quantity*item.price}" />
+														<td>${result}</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+										<div style="text-align: right;">
+											<h4 class="text-muted">Total Amount: $
+												${cart.totalAmtCharged}</h4>
+										</div>
+										<br>
+										<hr>
+										<br>
+									</c:forEach>
+
+
+								</div>
 							</div>
 							<hr>
-
-							<form method="post" action="signin">
-								<div class="top-margin">
-									<label>Username/Email <span class="text-danger">*</span></label>
-									<input type="text" name="userid" class="form-control">
-								</div>
-								<div class="top-margin">
-									<label>Password <span class="text-danger">*</span></label> <input
-										type="password" name="password" class="form-control">
-								</div>
-
-								<hr>
-
-								<div class="row">
-
-									<div class="col-lg-7 text-right">
-										<button class="btn btn-default" type="submit">Sign in</button>
-									</div>
-								</div>
-							</form>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -137,11 +148,7 @@
 	<script src="js/classie.js"></script>
 
 
-	<!-- Contact Form JavaScript -->
-	<script src="js/jqBootstrapValidation.js"></script>
 
 
-	<!-- Custom Theme JavaScript -->
-	<script src="js/agency.js"></script>
 </body>
 </html>

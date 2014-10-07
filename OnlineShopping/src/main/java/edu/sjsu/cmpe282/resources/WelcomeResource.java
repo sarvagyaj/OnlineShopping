@@ -1,6 +1,8 @@
 package edu.sjsu.cmpe282.resources;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -14,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import com.sun.jersey.api.view.Viewable;
 
+import edu.sjsu.cmpe282.dto.Cart;
 import edu.sjsu.cmpe282.dto.Catalog;
 import edu.sjsu.cmpe282.dto.Product;
 import edu.sjsu.cmpe282.dto.User;
@@ -141,6 +144,31 @@ public class WelcomeResource {
 
 	}
 
-	
+	@GET
+	@Path("viewCart")
+	@Produces("text/html")
+	public Response viewShoppingCart(@QueryParam("user_id") String userId) {
+		ShoppingCartResource shoppingCartResource = new ShoppingCartResource();
+		Cart shoppingCart = shoppingCartResource.getShoppingCart(userId);
+		return Response.ok(new Viewable("/viewCart", shoppingCart)).build();
+	}
+
+	@POST
+	@Path("placeOrder")
+	@Produces("text/html")
+	public Response placeOrder(@QueryParam("user_id") String userId) {
+		ShoppingCartResource shoppingCart = new ShoppingCartResource();
+		String[] resource = shoppingCart.placeOrder(userId);
+		return Response.ok(new Viewable(resource[0], resource[1])).build();
+	}
+
+	@GET
+	@Path("viewCartHistory")
+	@Produces("text/html")
+	public Response viewCartHistory(@QueryParam("user_id") String userId) {
+		ShoppingCartResource shoppingCartResource = new ShoppingCartResource();
+		List<Cart> shoppingCarts = shoppingCartResource.getCartHistory(userId);
+		return Response.ok(new Viewable("/viewHistory", shoppingCarts)).build();
+	}
 
 }

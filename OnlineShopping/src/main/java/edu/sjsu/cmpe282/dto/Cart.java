@@ -1,5 +1,6 @@
 package edu.sjsu.cmpe282.dto;
 
+import java.util.Date;
 import java.util.Set;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
@@ -12,9 +13,25 @@ public class Cart {
 	  private String userId;
       private String status;
       private double totalAmtCharged;
-      private Set<String> productList;			//list of prod ids in one purchase
+      private Set<String> productList;			//list of products in a purchase
+      private Set<Product> products;
+      private Date purchaseDate;
            
-    @DynamoDBHashKey(attributeName="user_id") 
+    public Set<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+	
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+	
+	@DynamoDBHashKey(attributeName="user_id") 
 	public String getUserId() {
 		return userId;
 	}
@@ -39,19 +56,18 @@ public class Cart {
 	}
 	
 	@DynamoDBAttribute(attributeName="product_list")
-	public Set<String> getProdcutList() {
+	public Set<String> getProductList() {
 		return productList;
 	}
-	public void setProdcutList(Set<String> prodcutList) {
-		this.productList = prodcutList;
+	public void setProductList(Set<String> productList) {
+		this.productList = productList;
 	}
 	
 
 	public String toString(){
-		return "Cart [userid ="+userId+", status= "+status+ ", product's ids = "+productList+"]";
+		return "Cart [userid ="+userId+", status= "+status+ ", products = "+products+"]";
 	}
-
-      
+	    
       
       
 }

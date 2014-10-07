@@ -22,7 +22,7 @@
 <link href="css/agency.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="font-awesome-4.1.0/css/font-awesome.min.css"
+<link href="font/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -123,8 +123,7 @@
 
 	<!-- Contact Form JavaScript -->
 	<script src="js/jqBootstrapValidation.js"></script>
-	<script src="js/contact_me.js"></script>
-
+	
 	<!-- Custom Theme JavaScript -->
 	<script src="js/agency.js"></script>
 

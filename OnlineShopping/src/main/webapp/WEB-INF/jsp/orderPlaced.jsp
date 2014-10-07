@@ -45,38 +45,45 @@
 
 <body id="page-top" class="index">
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header page-scroll">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand page-scroll" href="index.html">Shop
-					Online</a>
-			</div>
+	  <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="index.html">Shop Online</a>
+            </div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden"><a href="#page-top"></a></li>
-
-					<li><a class="page-scroll" href="addProduct">Add Product</a></li>
-					<li><a class="page-scroll" href="addCatalog">Add Catalog</a></li>
-					<li><a class="page-scroll" href="viewCart?user_id=sarva">My
-							Shopping Cart</a></li>
-					<li><a class="page-scroll" href="signin">Sign In / Sign Up</a></li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                   
+                    <li>
+                        <a class="page-scroll" href="addProduct">Add Product</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="addCatalog">Add Catalog</a>
+                    </li>
+                  	<li>
+                        <a class="page-scroll" href= "viewCart?user_id=sarva" >My Shopping Cart</a>
+                    </li>
+                     <li>
+                        <a class="page-scroll" href= "signin" >Sign In / Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
 	<!-- Article main content -->
 	<section id="services">
 		<div class="container">
@@ -86,45 +93,19 @@
 				<div class="col-md-12 col-md-offset-1 col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
-
 							<div class="col-lg-12 text-center">
 								<h2 class="section-heading">Products List</h2>
-								<h3 class="section-subheading text-muted">Category Name :
-									${it[0].catalogName}</h3>
+								<h3 class="section-subheading text-muted">${it}</h3>
 								<div class="table-responsive">
-									
-										<table id="cartTable" class="table table-striped table-hover">
-											<thead>
-												<tr>
-
-													<th>Product Name</th>
-													<th>Product Description</th>
-													<th>Price</th>
-													<th>Quantity Available</th>
-													<th>Add to Cart</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach var="item" items="${it}">
-													<tr data-id="${item.productID}"
-														data-quan="1"
-														data-catalog="${item.catalogName}">
-														<td>${item.prodName}</td>
-														<td>${item.desc}</td>
-														<td>${item.price}</td>
-														<td><input type="number" name="quantity" id="quantity"></td>
-														<td><button class="btn btn-primary" type="submit">Add
-																to Cart</button></td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
 									
 								</div>
 							</div>
 							<hr>
+
+
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -144,7 +125,6 @@
 		src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 	<script src="js/classie.js"></script>
 
-	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/addToCart.js"></script>
 </body>
 </html>

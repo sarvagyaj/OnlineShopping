@@ -60,7 +60,12 @@
                     <li>
                         <a class="page-scroll" href="addCatalog">Add Catalog</a>
                     </li>
-                  
+                  	<li>
+                        <a class="page-scroll" href= "viewCart?user_id=sarva" >My Shopping Cart</a>
+                    </li>
+                    	<li>
+                        <a class="page-scroll" href= "viewCartHistory?user_id=sarva" >View History</a>
+                    </li>
                      <li>
                         <a class="page-scroll" href= "signin" >Sign In / Sign Up</a>
                     </li>

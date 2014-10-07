@@ -34,12 +34,7 @@
 	href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'
 	rel='stylesheet' type='text/css'>
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
 
 </head>
 
@@ -68,7 +63,7 @@
 
 					<li><a class="page-scroll" href="addProduct">Add Product</a></li>
 					<li><a class="page-scroll" href="addCatalog">Add Catalog</a></li>
-					<li><a class="page-scroll" href="viewCart?user_id=sarva">My
+					<li><a class="page-scroll" href="viewCart?user_id=sar">My
 							Shopping Cart</a></li>
 					<li><a class="page-scroll" href="signin">Sign In / Sign Up</a></li>
 				</ul>
@@ -86,40 +81,86 @@
 				<div class="col-md-12 col-md-offset-1 col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
-
 							<div class="col-lg-12 text-center">
-								<h2 class="section-heading">Products List</h2>
-								<h3 class="section-subheading text-muted">Category Name :
-									${it[0].catalogName}</h3>
+								<h2 class="section-heading">My Cart</h2>
+								<h3 class="section-subheading text-muted">....</h3>
 								<div class="table-responsive">
-									
-										<table id="cartTable" class="table table-striped table-hover">
-											<thead>
-												<tr>
+									<table id="cartTable" class="table ">
+										<thead>
+											<tr>
 
-													<th>Product Name</th>
-													<th>Product Description</th>
-													<th>Price</th>
-													<th>Quantity Available</th>
-													<th>Add to Cart</th>
+												<th>Product Name</th>
+												<th>Price</th>
+												<th>Quantity</th>
+												<th>Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="item" items="${it.products}">
+												<tr data-id="${item.productID}" data-quan="1"
+													data-catalog="${item.catalogName}">
+													<td>${item.prodName}</td>
+													<td>${item.price}</td>
+													<td>${item.quantity}</td>
+													<c:set var="result" value="${item.quantity*item.price}" />
+													<td>${result}</td>
+													<td><button class="btn btn-primary" type="submit">Remove
+															Item</button></td>
 												</tr>
-											</thead>
-											<tbody>
-												<c:forEach var="item" items="${it}">
-													<tr data-id="${item.productID}"
-														data-quan="1"
-														data-catalog="${item.catalogName}">
-														<td>${item.prodName}</td>
-														<td>${item.desc}</td>
-														<td>${item.price}</td>
-														<td><input type="number" name="quantity" id="quantity"></td>
-														<td><button class="btn btn-primary" type="submit">Add
-																to Cart</button></td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									
+
+											</c:forEach>
+
+										</tbody>
+									</table>
+									<div style="text-align: right;">
+										<h4 class="text-muted">Total Amount: $
+											${it.totalAmtCharged}</h4>
+										<button class="btn btn-primary" id="pay" type="submit">CheckOut</button>
+									</div>
+									<br>
+									<div class="to-hide">
+										<div class=" col-md-offset-7 col-sm-offset-2">
+											<div class="panel panel-default">
+												<div class="panel-body" style="text-align: left;">
+													<form id="form" method="post"
+														action="placeOrder?user_id=sarva">
+														<div class="top-margin">
+															<label>Shipping Address</label> <input type="text"
+																name="shippingAddress" class="form-control">
+														</div>
+														<div class="top-margin">
+															<label>Billing Address</label> <input type="text"
+																name="billingAddress" class="form-control">
+														</div>
+														<div class="row top-margin">
+															<div class="col-sm-6">
+																<label>Name on Card<span class="text-danger">*</span></label>
+																<input type="text" name="password" required
+																	id="nameOnCard" class="form-control">
+															</div>
+															<div class="col-sm-6">
+																<label>Credit Card Number<span
+																	class="text-danger">*</span></label> <input type="text"
+																	name="ccNumber" id="ccNumber" class="form-control">
+																(Try : 4000 0000 0000 0002)
+															</div>
+														</div>
+
+
+														<hr>
+
+														<div class="row">
+
+															<div class="col-lg-7 text-right">
+																<button class="btn btn-default" type="submit">Place
+																	Order</button>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<hr>
@@ -145,6 +186,10 @@
 	<script src="js/classie.js"></script>
 
 	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/addToCart.js"></script>
+	<script src="js/additional-methods.min.js"></script>
+	<script src="js/creditCardValidation.js"></script>
+	
+
+
 </body>
 </html>
