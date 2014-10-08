@@ -6,13 +6,13 @@ $(document).delegate(':button', 'click', function() {
 	console.log(catalogName);
 	
 	$.ajax({
-		url : '/OnlineShopping/addToCart/'+sessionStorage.userId+'?cata='+catalogName+'&product_id=' + productID+'&quan=1',
+		url : '/OnlineShopping/removeFromCart/'+sessionStorage.userId+'?cata='+catalogName+'&product_id=' + productID+'&quan=1',
 		type : 'POST',
 		contentType : 'application/json',
 		success : function(result) {
-			console.log("added " + quan);
-			alert("Added !! ");
-		}
+			console.log("removed " + quan);
+			window.location.href = 'viewCart?user_id='+sessionStorage.userId ;
+			}
 	})
 });
 

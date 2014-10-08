@@ -1,8 +1,6 @@
 package edu.sjsu.cmpe282.resources;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -13,6 +11,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 import com.sun.jersey.api.view.Viewable;
 
@@ -36,23 +37,44 @@ public class WelcomeResource {
 		return Response.ok(new Viewable("/signin")).build();
 	}
 
-	@POST
+	/*@POST
 	@Path("signin")
 	@Produces("text/html")
 	public Response signIn(@FormParam("userid") String userid,
 			@FormParam("password") String password) {
 		UserResource userResource = new UserResource();
-		String[] resource = userResource.signIn(userid, password);
-		return Response.ok(new Viewable(resource[0], resource[1])).build();
+		User user = userResource.signIn(userid, password);
+		if(user!= null) {
+			return Response.ok(new Viewable("/index", user)).build();
+		}
+		return Response.ok(new Viewable("/signin",  "Incorrect username/password")).build();
+	}
+*/
+	
+	@POST
+	@Path("signin")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response signIn(@FormParam("userid") String userid,
+			@FormParam("password") String password) {
+		UserResource userResource = new UserResource();
+		User user = userResource.signIn(userid, password);
+		
+		
+		
+		if(user!= null) {
+			return Response.ok(new Viewable("/index", user)).build();
+		}
+		return Response.ok(new Viewable("/signin",  "Incorrect username/password")).build();
 	}
 
+	
 	@GET
 	@Path("signup")
 	@Produces("text/html")
 	public Response signUpPage() {
 		return Response.ok(new Viewable("/signup")).build();
 	}
-
+	
 	@POST
 	@Path("signup")
 	@Produces("text/html")
@@ -60,10 +82,27 @@ public class WelcomeResource {
 			@FormParam("lastName") String lastName,
 			@FormParam("email") String userid,
 			@FormParam("password") String password) {
-		User user = new User(firstName, lastName, userid, password);
+		User user = new User(firstName, lastName, userid, password,(short)0);
 		UserResource userResource = new UserResource();
-		String[] resource = userResource.signUp(user);
-		return Response.ok(new Viewable(resource[0], resource[1])).build();
+		User user1 = userResource.signUp(user);
+		if(user1!= null) {
+			return Response.ok(new Viewable("/index", user1)).build();
+		}
+		return Response.ok(new Viewable("/signup",  "Incorrect information. Please try again.")).build();
+	}
+	
+	@GET
+	@Path("signout")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JSONObject signOut() {
+		String json = "{'redirect':'./'}";
+		JSONObject obj=null;
+		    try {
+				 obj = new JSONObject(json);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		return obj;
 	}
 
 	@GET
@@ -140,6 +179,19 @@ public class WelcomeResource {
 			@QueryParam("quan") int quantity) {
 		ShoppingCartResource shoppingCart = new ShoppingCartResource();
 		shoppingCart.addProductToCart(userId, catalogName, productId, quantity);
+		return true;
+
+	}
+	
+	@POST
+	@Path("removeFromCart/{user_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean removeFromCart(@PathParam("user_id") String userId,
+			@QueryParam("cata") String catalogName,
+			@QueryParam("product_id") int productId,
+			@QueryParam("quan") int quantity) {
+		ShoppingCartResource shoppingCart = new ShoppingCartResource();
+		shoppingCart.removeProductFromCart(userId, catalogName, productId, quantity);
 		return true;
 
 	}

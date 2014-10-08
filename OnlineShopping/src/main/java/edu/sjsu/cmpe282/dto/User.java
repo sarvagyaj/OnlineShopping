@@ -6,15 +6,17 @@ public class User {
 	private String lastName;
 	private String email;
 	private String password;
+	private short isAdmin;
 		
 	public User() {
 		}
 	
-	public User(String firstName, String lastName, String email, String passwd) {
+	public User(String firstName, String lastName, String email, String passwd, short isAdmin) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = passwd;
+		this.isAdmin = isAdmin;
 	}
 
 	public String getFirstName() {
@@ -41,5 +43,12 @@ public class User {
 	public void setPassword(String passwd) {
 		this.password = passwd;
 	}
+	public short getIsAdmin() {
+		return isAdmin;
+	}
+	public void setIsAdmin(short isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 
+	
 }

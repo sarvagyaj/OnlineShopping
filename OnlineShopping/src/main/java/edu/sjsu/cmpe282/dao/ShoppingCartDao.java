@@ -87,23 +87,24 @@ public class ShoppingCartDao {
 		return true;
 
 	}
-	
-	public Cart getActiveCart(String userId) throws JsonParseException, JsonMappingException, IOException {
+
+	public Cart getActiveCart(String userId) throws JsonParseException,
+			JsonMappingException, IOException {
 		AmazonDynamoDBClient client = DynamoConnection.getInstance()
 				.getClient();
 		DynamoDBMapper mapper = new DynamoDBMapper(client);
 
 		// Retrieve the item.
 		Cart cartRetrieved = mapper.load(Cart.class, userId, "ACTIVE");
-		if(cartRetrieved==null) {
+		if (cartRetrieved == null) {
 			return null;
 		}
-		
+
 		convertProductStringSetToProducts(cartRetrieved);
 		System.out.println("Cart retrieved: " + cartRetrieved);
 		return cartRetrieved;
 	}
-	
+
 	public boolean setCartInactive(String userId) {
 		AmazonDynamoDBClient client = DynamoConnection.getInstance()
 				.getClient();
@@ -111,17 +112,18 @@ public class ShoppingCartDao {
 
 		// Update the item
 		Cart cartRetrieved = mapper.load(Cart.class, userId, "ACTIVE");
-		if(cartRetrieved == null) {
+		if (cartRetrieved == null) {
 			return false;
 		}
 		mapper.delete(cartRetrieved);
-		cartRetrieved.setStatus("INACTIVE "+System.currentTimeMillis());
+		cartRetrieved.setStatus("INACTIVE " + System.currentTimeMillis());
 		mapper.save(cartRetrieved);
 		System.out.println("Item updated: " + cartRetrieved);
 		return true;
 	}
 
-	public List<Cart> getInactiveCarts(String userId) throws JsonParseException, JsonMappingException, IOException {
+	public List<Cart> getInactiveCarts(String userId)
+			throws JsonParseException, JsonMappingException, IOException {
 		AmazonDynamoDBClient client = DynamoConnection.getInstance()
 				.getClient();
 		DynamoDBMapper mapper = new DynamoDBMapper(client);
@@ -129,47 +131,87 @@ public class ShoppingCartDao {
 		// Update the item
 		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
 		Map<String, Condition> scanFilter = new HashMap<String, Condition>();
-		Condition scanCondition = new Condition()
-		    .withComparisonOperator(ComparisonOperator.EQ.toString())
-		    .withAttributeValueList(new AttributeValue().withS(userId));
+		Condition scanCondition = new Condition().withComparisonOperator(
+				ComparisonOperator.EQ.toString()).withAttributeValueList(
+				new AttributeValue().withS(userId));
 		scanFilter.put("user_id", scanCondition);
 		scanExpression.setScanFilter(scanFilter);
 		List<Cart> allCarts = mapper.scan(Cart.class, scanExpression);
-		
-		if(allCarts == null) {
+
+		if (allCarts == null) {
 			return null;
 		}
-		
+
 		List<Cart> inactiveCarts = new ArrayList<Cart>();
-		for(Cart cart : allCarts) {
-			if(!cart.getStatus().equals("ACTIVE")) {
-				 if(cart.getStatus().contains(" ")) {
-					 String dateString =cart.getStatus().split(" ")[1];
-					 Date date = new Date(Long.parseLong(dateString));
-					 cart.setPurchaseDate(date);
+		for (Cart cart : allCarts) {
+			if (!cart.getStatus().equals("ACTIVE")) {
+				if (cart.getStatus().contains(" ")) {
+					String dateString = cart.getStatus().split(" ")[1];
+					Date date = new Date(Long.parseLong(dateString));
+					cart.setPurchaseDate(date);
 				}
-								
+
 				convertProductStringSetToProducts(cart);
 				inactiveCarts.add(cart);
-				System.out.println("Cart : "+cart);
+				System.out.println("Cart : " + cart);
 			}
 		}
 		return inactiveCarts;
 	}
 
-	
-	public void convertProductStringSetToProducts(Cart cartRetrieved) throws JsonParseException, JsonMappingException, IOException {
-	ObjectMapper jsonMapper = new ObjectMapper();
-	Set<Product> productSet = new HashSet<Product>();
-	for (String prod : cartRetrieved.getProductList()) {
-		Product cartProduct = jsonMapper.readValue(prod, Product.class);
-		productSet.add(cartProduct);
+	public void convertProductStringSetToProducts(Cart cartRetrieved)
+			throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper jsonMapper = new ObjectMapper();
+		Set<Product> productSet = new HashSet<Product>();
+		if (cartRetrieved.getProductList() != null
+				&& !cartRetrieved.getProductList().isEmpty()) {
+			for (String prod : cartRetrieved.getProductList()) {
+				Product cartProduct = jsonMapper.readValue(prod, Product.class);
+				productSet.add(cartProduct);
+			}
+			cartRetrieved.setProducts(productSet);
+			cartRetrieved.setProductList(null);
+		}
 	}
-	cartRetrieved.setProducts(productSet);
-	cartRetrieved.setProductList(null);
+
+	public boolean removeProductFromCart(String userId, String catalogName,
+			int productId, int quantity) throws JsonParseException,
+			JsonMappingException, IOException {
+		AmazonDynamoDBClient client = DynamoConnection.getInstance()
+				.getClient();
+		DynamoDBMapper mapper = new DynamoDBMapper(client);
+		ObjectMapper jsonMapper = new ObjectMapper();
+
+		// Retrieve the item.
+		Cart cartRetrieved = mapper.load(Cart.class, userId, "ACTIVE");
+		System.out.println("Cart retrieved: " + cartRetrieved);
+
+		if (cartRetrieved == null) {
+			return false;
+		}
+
+		// Update the item.
+		Set<String> products = cartRetrieved.getProductList();
+		for (String prod : products) {
+			Product cartProduct = null;
+			cartProduct = jsonMapper.readValue(prod, Product.class);
+			if (cartProduct.getProductID() == productId) {
+				double chargedAmt = cartProduct.getPrice()*cartProduct.getQuantity();
+				cartRetrieved.setTotalAmtCharged(cartRetrieved.getTotalAmtCharged()-chargedAmt);
+				products.remove(prod);
+				if (!products.isEmpty()) {
+					cartRetrieved.setProductList(products);
+					break;
+				}
+				cartRetrieved.setProductList(null);
+				break;
+			}
+		}
+
+		mapper.save(cartRetrieved);
+		System.out.println("Item updated: " + cartRetrieved);
+		return true;
+
 	}
+
 }
-
-
-
-

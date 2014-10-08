@@ -20,15 +20,12 @@ public class UserDao {
 		try {
 			connection = MySQLConnection.getInstance().getConnection();
 			statement = connection.createStatement();
-			String query = "INSERT INTO `"+Constants.SCHEMA_NAME+"`.`user` (`first_name`, `last_name`, `email_id`, `password`) VALUES ('"
-					+ user.getFirstName()
-					+ "', '"
-					+ user.getLastName()
-					+ "', '"
-					+ user.getEmail()
-					+ "', '"
-					+ user.getPassword()
-					+ "');";
+			String query = "INSERT INTO `"
+					+ Constants.SCHEMA_NAME
+					+ "`.`user` (`first_name`, `last_name`, `email_id`, `password`,`is_admin`) VALUES ('"
+					+ user.getFirstName() + "', '" + user.getLastName()
+					+ "', '" + user.getEmail() + "', '" + user.getPassword()
+					+ "','0');";
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,66 +34,75 @@ public class UserDao {
 	}
 
 	public boolean login(String userid, String password) {
-		if(validatePassword(userid, password)) {
+		if (validatePassword(userid, password)) {
 			return true;
 		}
 		return false;
-		
-	
-		
-		
+
 	}
-	
-	 public boolean validatePassword(String userid, String password){
-		  String originalPassword = null;
-		  	try {
-		  		connection = MySQLConnection.getInstance().getConnection();
-		  		preparedStatement = connection.prepareStatement("Select password from `"+Constants.SCHEMA_NAME +"`.`user` where email_id=?");
-		  		preparedStatement.setString(1, userid);
-		  		resultSet=preparedStatement.executeQuery();
-		  		
-		  		resultSet.next();
-		  		originalPassword = resultSet.getString("password");
-		  		System.out.println("Password from db : "+ originalPassword );
-		  		System.out.println("Password entered : "+password);
-		  		} catch (SQLException e) {
-		  			e.printStackTrace();
-		  		}
 
-		  		return password.equals(originalPassword);
-		  }
-	 
-	 public String getFirstName(String userid){
-		  String firstName = null;
-		  	try {
-		  		connection = MySQLConnection.getInstance().getConnection();
-		  		preparedStatement = connection.prepareStatement("Select first_name from `"+Constants.SCHEMA_NAME+"`.`user` where email_id=?");
-		  		preparedStatement.setString(1, userid);
-		  		resultSet=preparedStatement.executeQuery();
-		  	
-		  		resultSet.next();
-		  		firstName = resultSet.getString("first_name");
-		  		} catch (SQLException e) {
-		  			e.printStackTrace();
-		  		}
+	public boolean validatePassword(String userid, String password) {
+		String originalPassword = null;
+		try {
+			connection = MySQLConnection.getInstance().getConnection();
+			preparedStatement = connection
+					.prepareStatement("Select password from `"
+							+ Constants.SCHEMA_NAME
+							+ "`.`user` where email_id=?");
+			preparedStatement.setString(1, userid);
+			resultSet = preparedStatement.executeQuery();
 
-		  		return firstName;
-		  }
-	 
-	 public User getUser(String userid){
-		  User user = null;
-		  	try {
-		  		connection = MySQLConnection.getInstance().getConnection();
-		  		preparedStatement = connection.prepareStatement("Select first_name,last_name, password from `"+Constants.SCHEMA_NAME+"`.`user` where email_id=?");
-		  		preparedStatement.setString(1, userid);
-		  		resultSet=preparedStatement.executeQuery();
-		  	
-		  		resultSet.next();
-		  		user = new User(resultSet.getString("first_name"),resultSet.getString("last_name"),userid,resultSet.getString("password"));
-		  		} catch (SQLException e) {
-		  			e.printStackTrace();
-		  		}
+			resultSet.next();
+			originalPassword = resultSet.getString("password");
+			System.out.println("Password from db : " + originalPassword);
+			System.out.println("Password entered : " + password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-		  		return user;
-		  }
+		return password.equals(originalPassword);
+	}
+
+	public String getFirstName(String userid) {
+		String firstName = null;
+		try {
+			connection = MySQLConnection.getInstance().getConnection();
+			preparedStatement = connection
+					.prepareStatement("Select first_name from `"
+							+ Constants.SCHEMA_NAME
+							+ "`.`user` where email_id=?");
+			preparedStatement.setString(1, userid);
+			resultSet = preparedStatement.executeQuery();
+
+			resultSet.next();
+			firstName = resultSet.getString("first_name");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return firstName;
+	}
+
+	public User getUser(String userid) {
+		User user = null;
+		try {
+			connection = MySQLConnection.getInstance().getConnection();
+			preparedStatement = connection
+					.prepareStatement("Select first_name,last_name, password,is_admin from `"
+							+ Constants.SCHEMA_NAME
+							+ "`.`user` where email_id=?");
+			preparedStatement.setString(1, userid);
+			resultSet = preparedStatement.executeQuery();
+
+			resultSet.next();
+			user = new User(resultSet.getString("first_name"),
+					resultSet.getString("last_name"), userid,
+					resultSet.getString("password"),
+					resultSet.getShort("is_admin"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return user;
+	}
 }

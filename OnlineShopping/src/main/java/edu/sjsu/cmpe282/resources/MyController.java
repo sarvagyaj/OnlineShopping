@@ -42,7 +42,7 @@ public class MyController {
 		return Response.ok(new Viewable("/test1", list)).build();
 	}
 	
-	@GET
+/*	@GET
 	@Path("/three")
 	@Produces("text/html")
 	public Response index2() {
@@ -54,5 +54,5 @@ public class MyController {
 		users.add(user2);
 		return Response.ok(new Viewable("/test1", users)).build();
 	}
-
+*/
 }

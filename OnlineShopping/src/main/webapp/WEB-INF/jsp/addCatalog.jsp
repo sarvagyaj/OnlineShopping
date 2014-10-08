@@ -40,11 +40,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script src="js/menu.js"></script>
 </head>
 
-<body id="page-top" class="index">
-
+<body onload="callStore()" id="page-top" class="index">
+	
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
@@ -56,8 +56,8 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand page-scroll" href="index.html">Start
-					Bootstrap</a>
+					<a class="navbar-brand page-scroll" href="./">Shop
+					Online</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,12 +65,21 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="services.html">Services</a></li>
-					<li><a class="page-scroll" href="catalogue.html">Portfolio</a>
-					</li>
-					<li><a class="page-scroll" href="about.html">About</a></li>
-					<li><a class="page-scroll" href=products.html>Team</a></li>
-					<li><a class="page-scroll" href="contact.html">Contact</a></li>
+					<li class="admin-menu"><a class="page-scroll"
+						href="addProduct">Add Product</a></li>
+					<li class="admin-menu"><a class="page-scroll"
+						href="addCatalog">Add Catalog</a></li>
+					<li class="login"><a class="page-scroll"
+						href="viewCart?user_id=sarva" id="cart">My Shopping Cart</a></li>
+					<li class="login"><a class="page-scroll"
+						href="viewCartHistory?user_id=sarva" id="history">View History</a></li>
+					<li class="not-login"><a class="page-scroll" href="signin">Sign
+							In / Sign Up</a></li>
+					<li class="login" onclick=signout()><a class="page-scroll" >Sign
+							Out</a></li>
+					<li class="login"><a class="page-scroll" ></a></li>
+					<li class="login"><a class="page-scroll" ></a></li>
+					<li class="login"><h4 class="section-subheading text-muted"><div id="userName"></div></h4></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

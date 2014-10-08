@@ -80,4 +80,25 @@ public class ShoppingCartResource {
 		return cartList;
 	
 	}
+
+	public boolean removeProductFromCart(String userId, String catalogName,
+			int productId, int quantity) {
+		ShoppingCartDao cartDao = new ShoppingCartDao();
+		boolean productRemoved = false;
+		try {
+			productRemoved = cartDao.removeProductFromCart(userId, catalogName,
+					productId, quantity);
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (productRemoved) {
+			return true;
+		}
+		return false;
+		
+	}
 }

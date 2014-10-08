@@ -33,13 +33,11 @@
 <link
 	href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'
 	rel='stylesheet' type='text/css'>
-
-
-
+<script src="js/menu.js"></script>
 </head>
 
-<body id="page-top" class="index">
-
+<body onload="callStore()" id="page-top" class="index">
+	
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
@@ -51,7 +49,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand page-scroll" href="index.html">Shop
+					<a class="navbar-brand page-scroll" href="./">Shop
 					Online</a>
 			</div>
 
@@ -60,12 +58,21 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-
-					<li><a class="page-scroll" href="addProduct">Add Product</a></li>
-					<li><a class="page-scroll" href="addCatalog">Add Catalog</a></li>
-					<li><a class="page-scroll" href="viewCart?user_id=sar">My
-							Shopping Cart</a></li>
-					<li><a class="page-scroll" href="signin">Sign In / Sign Up</a></li>
+					<li class="admin-menu"><a class="page-scroll"
+						href="addProduct">Add Product</a></li>
+					<li class="admin-menu"><a class="page-scroll"
+						href="addCatalog">Add Catalog</a></li>
+					<li class="login"><a class="page-scroll"
+						href="viewCart?user_id=sarva" id="cart">My Shopping Cart</a></li>
+					<li class="login"><a class="page-scroll"
+						href="viewCartHistory?user_id=sarva" id="history">View History</a></li>
+					<li class="not-login"><a class="page-scroll" href="signin">Sign
+							In / Sign Up</a></li>
+					<li class="login" onclick=signout()><a class="page-scroll" >Sign
+							Out</a></li>
+					<li class="login"><a class="page-scroll" ></a></li>
+					<li class="login"><a class="page-scroll" ></a></li>
+					<li class="login"><h4 class="section-subheading text-muted"><div id="userName"></div></h4></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -187,6 +194,7 @@
 
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/additional-methods.min.js"></script>
+	<script src="js/removefromCart.js"></script>	
 	<script src="js/creditCardValidation.js"></script>
 	
 

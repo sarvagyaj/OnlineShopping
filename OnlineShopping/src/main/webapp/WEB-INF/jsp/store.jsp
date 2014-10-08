@@ -22,8 +22,8 @@
 <link href="css/agency.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="font/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
+<link href="font/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Kaushan+Script'
@@ -41,11 +41,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script src="js/menu.js"></script>
 </head>
 
-<body id="page-top" class="index">
-
+<body onload="callStore()" id="page-top" class="index">
+	
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
@@ -57,8 +57,8 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand page-scroll" href="index.html">Start
-					Bootstrap</a>
+					<a class="navbar-brand page-scroll" href="./">Shop
+					Online</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -66,21 +66,29 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="services.html">Services</a></li>
-					<li><a class="page-scroll" href="catalogue.html">Portfolio</a>
-					</li>
-					<li><a class="page-scroll" href="about.html">About</a></li>
-					<li><a class="page-scroll" href=products.html>Team</a></li>
-					<li><a class="page-scroll" href="contact.html">Contact</a></li>
-					<li>
-						<h4 class="section-subheading text-muted"></h4>
-					</li>
+					<li class="admin-menu"><a class="page-scroll"
+						href="addProduct">Add Product</a></li>
+					<li class="admin-menu"><a class="page-scroll"
+						href="addCatalog">Add Catalog</a></li>
+					<li class="login"><a class="page-scroll"
+						href="viewCart?user_id=sarva" id="cart">My Shopping Cart</a></li>
+					<li class="login"><a class="page-scroll"
+						href="viewCartHistory?user_id=sarva" id="history">View History</a></li>
+					<li class="not-login"><a class="page-scroll" href="signin">Sign
+							In / Sign Up</a></li>
+					<li class="login" onclick=signout()><a class="page-scroll" >Sign
+							Out</a></li>
+					<li class="login"><a class="page-scroll" ></a></li>
+					<li class="login"><a class="page-scroll" ></a></li>
+					<li class="login"><h4 class="section-subheading text-muted"><div id="userName"></div></h4></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+
+
 	<!-- Portfolio Grid Section -->
 	<section id="portfolio" class="bg-light-gray">
 		<div class="container">
@@ -89,23 +97,23 @@
 					<h2 class="section-heading">Our Store</h2>
 					<h3 class="section-subheading text-muted">It's Shopping Time
 						!!!</h3>
+						
 				</div>
 			</div>
 
 			<c:forEach var="item" items="${it}">
 				<div class="row">
 					<div class="col-md-4 col-sm-6 portfolio-item">
-						<a href="viewProducts?catalogName=${item.catalogName}"><img src="img/portfolio/roundicons.png"
-							class="img-responsive" alt=""></a>
+						<a href="viewProducts?catalogName=${item.catalogName}"><img
+							src="img/portfolio/roundicons.png" class="img-responsive" alt=""></a>
 
 						<div class="portfolio-caption">
 							<h4>${item.catalogName}</h4>
 							<p class="text-muted">${item.catalogDesc}</p>
 						</div>
 					</div>
-				
 			</c:forEach>
-			</div>
+		</div>
 	</section>
 
 
@@ -123,9 +131,10 @@
 
 	<!-- Contact Form JavaScript -->
 	<script src="js/jqBootstrapValidation.js"></script>
-	
+
 	<!-- Custom Theme JavaScript -->
 	<script src="js/agency.js"></script>
+
 
 </body>
 </html>
