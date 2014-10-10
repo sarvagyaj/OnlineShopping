@@ -43,11 +43,12 @@
 <script src="js/menu.js"></script>
 </head>
 
-<body  id="page-top" class="index">
-	
+<body onload="myFunction()" id="page-top" class="index">
+<input type="hidden" id="firstName" value="${it.user.firstName}">
+	<input type="hidden" id="isAdmin" value="${it.user.isAdmin}">
+	<input type="hidden" id="email" value="${it.user.email}">	
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header page-scroll">
@@ -62,11 +63,25 @@
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse"
+			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					
+					<li class="admin-menu"><a class="page-scroll"
+						href="addProduct">Add Product</a></li>
+					<li class="admin-menu"><a class="page-scroll"
+						href="addCatalog">Add Catalog</a></li>
+					<li class="login"><a class="page-scroll"
+						href="viewCart?user_id=sarva" id="cart">My Shopping Cart</a></li>
+					<li class="login"><a class="page-scroll"
+						href="viewCartHistory?user_id=sarva" id="history">View History</a></li>
+					<li class="not-login"><a class="page-scroll" href="signin">Sign
+							In / Sign Up</a></li>
+					<li class="login" onclick=signout()><a class="page-scroll" >Sign
+							Out</a></li>
+					<li class="login"><a class="page-scroll" ></a></li>
+					<li class="login"><a class="page-scroll" ></a></li>
+					<li class="login"><h4 class="section-subheading text-muted"><div id="userName"></div></h4></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -86,13 +101,13 @@
 							<div class="col-lg-12 text-center">
 								<h2 class="section-heading">Sign In</h2>
 								<h3 class="section-subheading text-muted">
-									If you are not registered, click here to <a href="signup">Register</a>
-								</h3>
-								<h4>${it}</h4>
+									<div id="line"> If you are not registered, click here to <a href="signup">Register</a>
+								</div></h3>
+								<h4>${it.statement}</h4>
 							</div>
 							<hr>
 
-							<form method="post" action="signin">
+							<form method="post" action="signin" id="form">
 								<div class="top-margin">
 									<label>Username/Email <span class="text-danger">*</span></label>
 									<input type="text" name="userid" class="form-control">

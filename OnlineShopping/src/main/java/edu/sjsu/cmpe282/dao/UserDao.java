@@ -18,6 +18,9 @@ public class UserDao {
 
 	public boolean addUser(User user) {
 		try {
+			if(!validateEmail(user.getEmail())) {
+				return false;
+			}
 			connection = MySQLConnection.getInstance().getConnection();
 			statement = connection.createStatement();
 			String query = "INSERT INTO `"
@@ -41,6 +44,28 @@ public class UserDao {
 
 	}
 
+	public boolean validateEmail(String userid) {
+		String emailId = null;
+		try {
+			connection = MySQLConnection.getInstance().getConnection();
+			preparedStatement = connection
+					.prepareStatement("Select email_id from `"
+							+ Constants.SCHEMA_NAME
+							+ "`.`user` where email_id=?");
+			preparedStatement.setString(1, userid);
+			resultSet = preparedStatement.executeQuery();
+
+			if(!resultSet.next()){
+				return true;
+			}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+		
 	public boolean validatePassword(String userid, String password) {
 		String originalPassword = null;
 		try {

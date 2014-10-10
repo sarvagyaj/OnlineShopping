@@ -1,6 +1,8 @@
 package edu.sjsu.cmpe282.resources;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -37,35 +39,36 @@ public class WelcomeResource {
 		return Response.ok(new Viewable("/signin")).build();
 	}
 
-	/*@POST
+	@POST
 	@Path("signin")
 	@Produces("text/html")
 	public Response signIn(@FormParam("userid") String userid,
 			@FormParam("password") String password) {
 		UserResource userResource = new UserResource();
 		User user = userResource.signIn(userid, password);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user", user);
+		
 		if(user!= null) {
-			return Response.ok(new Viewable("/index", user)).build();
+			map.put("statement", "Welcome "+user.getFirstName()+". Have fun shopping!! " );			
+		} else {
+			map.put("statement", "Incorrect username/password" );	
 		}
-		return Response.ok(new Viewable("/signin",  "Incorrect username/password")).build();
+		return Response.ok(new Viewable("/signin", map)).build();
+		
 	}
-*/
+
 	
-	@POST
+/*	@POST
 	@Path("signin")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response signIn(@FormParam("userid") String userid,
+	public User signIn(@FormParam("userid") String userid,
 			@FormParam("password") String password) {
 		UserResource userResource = new UserResource();
 		User user = userResource.signIn(userid, password);
 		
-		
-		
-		if(user!= null) {
-			return Response.ok(new Viewable("/index", user)).build();
-		}
-		return Response.ok(new Viewable("/signin",  "Incorrect username/password")).build();
-	}
+		return user;
+	}*/
 
 	
 	@GET
@@ -85,12 +88,34 @@ public class WelcomeResource {
 		User user = new User(firstName, lastName, userid, password,(short)0);
 		UserResource userResource = new UserResource();
 		User user1 = userResource.signUp(user);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user", user1);
+		
+		if(user1!= null) {
+			map.put("statement", "You are succesfully registered, "+user1.getFirstName()+"" );			
+		} else {
+			map.put("statement", "Email already exist. Please try again with another email id." );	
+		}
+		return Response.ok(new Viewable("/signup", map)).build();
+
+	}
+	
+	/*@POST
+	@Path("signup")
+	@Produces("text/html")
+	public Response signUp(@FormParam("firstName") String firstName,
+			@FormParam("lastName") String lastName,
+			@FormParam("email") String userid,
+			@FormParam("password") String password) {
+		User user = new User(firstName, lastName, userid, password,(short)0);
+		UserResource userResource = new UserResource();
+		User user1 = userResource.signUp(user);
 		if(user1!= null) {
 			return Response.ok(new Viewable("/index", user1)).build();
 		}
 		return Response.ok(new Viewable("/signup",  "Incorrect information. Please try again.")).build();
 	}
-	
+	*/
 	@GET
 	@Path("signout")
 	@Produces(MediaType.APPLICATION_JSON)

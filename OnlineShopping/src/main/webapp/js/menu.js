@@ -6,6 +6,8 @@ function myFunction() {
 
 	showMenuItems(firstName, isAdmin,userId);
 	sessionStore(firstName, userId, isAdmin);
+	
+	
 }
 
 function sessionStore(firstName, userId, isAdmin) {
@@ -33,8 +35,11 @@ function showMenuItems(firstName, isAdmin, userId) {
 	}
 
 	if (firstName) {
+		$("#line").hide();
+		$("#form").hide();
 		$(".login").show();
 		$(".not-login").hide();
+		
 	} else {
 		$(".login").hide();
 		$(".not-login").show();
@@ -67,4 +72,5 @@ function changeLinks(userId) {
 	$("a#cart").prop('href','viewCart?user_id='+userId);
 	//console.log("link  "+$("a#history").href());
 }
+
 
