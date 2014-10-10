@@ -37,7 +37,7 @@
 </head>
 
 <body onload="callStore()" id="page-top" class="index">
-	
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
@@ -49,8 +49,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-					<a class="navbar-brand page-scroll" href="./">Shop
-					Online</a>
+				<a class="navbar-brand page-scroll" href="./">Shop Online</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -62,17 +61,20 @@
 						href="addProduct">Add Product</a></li>
 					<li class="admin-menu"><a class="page-scroll"
 						href="addCatalog">Add Catalog</a></li>
+					<li><a class="page-scroll" href="store">View Store</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCart?user_id=sarva" id="cart">My Shopping Cart</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCartHistory?user_id=sarva" id="history">View History</a></li>
 					<li class="not-login"><a class="page-scroll" href="signin">Sign
 							In / Sign Up</a></li>
-					<li class="login" onclick=signout()><a class="page-scroll" >Sign
+					<li class="login" onclick=signout()><a class="page-scroll">Sign
 							Out</a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><h4 class="section-subheading text-muted"><div id="userName"></div></h4></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><h4 class="section-subheading text-muted">
+							<div id="userName"></div>
+						</h4></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -111,8 +113,8 @@
 													<td>${item.quantity}</td>
 													<c:set var="result" value="${item.quantity*item.price}" />
 													<td>${result}</td>
-													<td><button class="btn btn-primary" type="submit">Remove
-															Item</button></td>
+													<td><div class ="removeBtn"><button class="btn btn-primary" type="submit">Remove
+															Item</button></div></td>
 												</tr>
 
 											</c:forEach>
@@ -122,7 +124,7 @@
 									<div style="text-align: right;">
 										<h4 class="text-muted">Total Amount: $
 											${it.totalAmtCharged}</h4>
-										<button class="btn btn-primary" id="pay" type="submit">CheckOut</button>
+										<button class="btn btn-primary" id="pay" type="submit" onclick="pay()">CheckOut</button>
 									</div>
 									<br>
 									<div class="to-hide">
@@ -194,9 +196,9 @@
 
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/additional-methods.min.js"></script>
-	<script src="js/removefromCart.js"></script>	
+	<script src="js/removefromCart.js"></script>
 	<script src="js/creditCardValidation.js"></script>
-	
+
 
 
 </body>

@@ -44,7 +44,7 @@
 </head>
 
 <body onload="callStore()" id="page-top" class="index">
-	
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
@@ -56,8 +56,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-					<a class="navbar-brand page-scroll" href="./">Shop
-					Online</a>
+				<a class="navbar-brand page-scroll" href="./">Shop Online</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -69,17 +68,20 @@
 						href="addProduct">Add Product</a></li>
 					<li class="admin-menu"><a class="page-scroll"
 						href="addCatalog">Add Catalog</a></li>
+					<li><a class="page-scroll" href="store">View Store</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCart?user_id=sarva" id="cart">My Shopping Cart</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCartHistory?user_id=sarva" id="history">View History</a></li>
 					<li class="not-login"><a class="page-scroll" href="signin">Sign
 							In / Sign Up</a></li>
-					<li class="login" onclick=signout()><a class="page-scroll" >Sign
+					<li class="login" onclick=signout()><a class="page-scroll">Sign
 							Out</a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><h4 class="section-subheading text-muted"><div id="userName"></div></h4></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><h4 class="section-subheading text-muted">
+							<div id="userName"></div>
+						</h4></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -105,14 +107,13 @@
 
 							<form id="form" method="post" action="addProduct">
 								<div class="top-margin">
-									<label>Catalog Name</label> 
-										 <select required name="catalogName"
+									<label>Catalog Name</label> <select required name="catalogName"
 										id="catalogName" class="form-control">
-										</select> 
+									</select>
 								</div>
 								<div class="top-margin">
-									<label>Product Name</label> <input type="text" required name="prodName"
-										class="form-control">
+									<label>Product Name</label> <input type="text" required
+										name="prodName" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Product Description</label> <input type="text"
@@ -124,8 +125,8 @@
 								</div>
 
 								<div class="top-margin">
-									<label>Quantity</label> <input type="text" required name="quantity"
-										class="form-control">
+									<label>Quantity</label> <input type="text" required
+										name="quantity" class="form-control">
 								</div>
 
 
@@ -134,7 +135,8 @@
 								<div class="row">
 
 									<div class="col-lg-7 text-right">
-										<button class="btn btn-default" type="submit">Add Product</button>
+										<button class="btn btn-default" type="submit">Add
+											Product</button>
 									</div>
 								</div>
 							</form>

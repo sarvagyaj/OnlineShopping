@@ -62,23 +62,31 @@ public class ShoppingCartDao {
 		// Update the item.
 		Set<String> products = cartRetrieved.getProductList();
 		boolean productAlreadyPresent = false;
-		for (String prod : products) {
-			Product cartProduct = null;
-			cartProduct = jsonMapper.readValue(prod, Product.class);
-			System.out.println(cartProduct);
-			if (cartProduct.getProductID() == productId) {
-				cartProduct.setQuantity(quantity + cartProduct.getQuantity());
-				String prodUpdated = jsonMapper.writeValueAsString(cartProduct);
-				products.remove(prod);
-				products.add(prodUpdated);
-				productAlreadyPresent = true;
-				break;
+		if (products != null && !products.isEmpty()) {
+			for (String prod : products) {
+				Product cartProduct = null;
+				cartProduct = jsonMapper.readValue(prod, Product.class);
+				System.out.println(cartProduct);
+				if (cartProduct.getProductID() == productId) {
+					cartProduct.setQuantity(quantity
+							+ cartProduct.getQuantity());
+					String prodUpdated = jsonMapper
+							.writeValueAsString(cartProduct);
+					products.remove(prod);
+					products.add(prodUpdated);
+					productAlreadyPresent = true;
+					break;
+				}
 			}
 		}
 		if (!productAlreadyPresent) {
+			if(products == null) {
+				products = new HashSet<String>();
+			}
 			products.add(productAsJson);
 			cartRetrieved.setProductList(products);
 		}
+		
 
 		cartRetrieved.setTotalAmtCharged(cartRetrieved.getTotalAmtCharged()
 				+ (quantity * product.getPrice()));
@@ -196,8 +204,10 @@ public class ShoppingCartDao {
 			Product cartProduct = null;
 			cartProduct = jsonMapper.readValue(prod, Product.class);
 			if (cartProduct.getProductID() == productId) {
-				double chargedAmt = cartProduct.getPrice()*cartProduct.getQuantity();
-				cartRetrieved.setTotalAmtCharged(cartRetrieved.getTotalAmtCharged()-chargedAmt);
+				double chargedAmt = cartProduct.getPrice()
+						* cartProduct.getQuantity();
+				cartRetrieved.setTotalAmtCharged(cartRetrieved
+						.getTotalAmtCharged() - chargedAmt);
 				products.remove(prod);
 				if (!products.isEmpty()) {
 					cartRetrieved.setProductList(products);

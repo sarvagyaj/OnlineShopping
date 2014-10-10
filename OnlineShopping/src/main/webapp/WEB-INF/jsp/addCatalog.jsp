@@ -44,7 +44,7 @@
 </head>
 
 <body onload="callStore()" id="page-top" class="index">
-	
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
@@ -56,8 +56,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-					<a class="navbar-brand page-scroll" href="./">Shop
-					Online</a>
+				<a class="navbar-brand page-scroll" href="./">Shop Online</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -69,17 +68,20 @@
 						href="addProduct">Add Product</a></li>
 					<li class="admin-menu"><a class="page-scroll"
 						href="addCatalog">Add Catalog</a></li>
+					<li><a class="page-scroll" href="store">View Store</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCart?user_id=sarva" id="cart">My Shopping Cart</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCartHistory?user_id=sarva" id="history">View History</a></li>
 					<li class="not-login"><a class="page-scroll" href="signin">Sign
 							In / Sign Up</a></li>
-					<li class="login" onclick=signout()><a class="page-scroll" >Sign
+					<li class="login" onclick=signout()><a class="page-scroll">Sign
 							Out</a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><h4 class="section-subheading text-muted"><div id="userName"></div></h4></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><h4 class="section-subheading text-muted">
+							<div id="userName"></div>
+						</h4></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -97,29 +99,30 @@
 						<div class="panel-body">
 							<div class="col-lg-12 text-center">
 								<h2 class="section-heading">Create Catalog</h2>
-								<h3 class="section-subheading text-muted">To create a catalog,
-									please enter its information</h3>
+								<h3 class="section-subheading text-muted">To create a
+									catalog, please enter its information</h3>
 							</div>
 							<h4>${it}</h4>
 							<hr>
 
 							<form id="form" method="post" action="addCatalog">
 								<div class="top-margin">
-									<label>Catalog Name</label> <input type="text" name="catalogName"
-										class="form-control">
+									<label>Catalog Name</label> <input type="text"
+										name="catalogName" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Catalog Description</label> <input type="text"
 										name="desc" class="form-control">
 								</div>
-								
+
 
 								<hr>
 
 								<div class="row">
 
 									<div class="col-lg-7 text-right">
-										<button class="btn btn-default" type="submit"> Create </button>
+										<button class="btn btn-default" type="submit">Create
+										</button>
 									</div>
 								</div>
 							</form>

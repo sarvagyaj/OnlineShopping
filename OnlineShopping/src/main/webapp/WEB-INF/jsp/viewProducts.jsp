@@ -44,7 +44,7 @@
 </head>
 
 <body onload="callStore()" id="page-top" class="index">
-	
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
@@ -56,8 +56,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-					<a class="navbar-brand page-scroll" href="./">Shop
-					Online</a>
+				<a class="navbar-brand page-scroll" href="./">Shop Online</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -69,17 +68,20 @@
 						href="addProduct">Add Product</a></li>
 					<li class="admin-menu"><a class="page-scroll"
 						href="addCatalog">Add Catalog</a></li>
+					<li><a class="page-scroll" href="store">View Store</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCart?user_id=sarva" id="cart">My Shopping Cart</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCartHistory?user_id=sarva" id="history">View History</a></li>
 					<li class="not-login"><a class="page-scroll" href="signin">Sign
 							In / Sign Up</a></li>
-					<li class="login" onclick=signout()><a class="page-scroll" >Sign
+					<li class="login" onclick=signout()><a class="page-scroll">Sign
 							Out</a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><h4 class="section-subheading text-muted"><div id="userName"></div></h4></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><h4 class="section-subheading text-muted">
+							<div id="userName"></div>
+						</h4></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -101,34 +103,34 @@
 								<h3 class="section-subheading text-muted">Category Name :
 									${it[0].catalogName}</h3>
 								<div class="table-responsive">
-									
-										<table id="cartTable" class="table table-striped table-hover">
-											<thead>
-												<tr>
 
-													<th>Product Name</th>
-													<th>Product Description</th>
-													<th>Price</th>
-													<th>Quantity Available</th>
-													<th>Add to Cart</th>
+									<table id="cartTable" class="table table-striped table-hover">
+										<thead>
+											<tr>
+
+												<th>Product Name</th>
+												<th>Product Description</th>
+												<th>Price</th>
+												<th>Quantity Available</th>
+												<th>Add to Cart</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="item" items="${it}">
+												<tr data-id="${item.productID}" data-quan="1"
+													data-catalog="${item.catalogName}">
+													<td>${item.prodName}</td>
+													<td>${item.desc}</td>
+													<td>${item.price}</td>
+													<td><input type="number" name="quantity" id="quantity"
+														min="1" max="${item.quantity}" value="1"></td>
+													<td><button class="btn btn-primary" type="submit">Add
+															to Cart</button></td>
 												</tr>
-											</thead>
-											<tbody>
-												<c:forEach var="item" items="${it}">
-													<tr data-id="${item.productID}"
-														data-quan="1"
-														data-catalog="${item.catalogName}">
-														<td>${item.prodName}</td>
-														<td>${item.desc}</td>
-														<td>${item.price}</td>
-														<td><input type="number" name="quantity" id="quantity" min="1" max="${item.quantity}" value="1"></td>
-														<td><button class="btn btn-primary" type="submit">Add
-																to Cart</button></td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									
+											</c:forEach>
+										</tbody>
+									</table>
+
 								</div>
 							</div>
 							<hr>

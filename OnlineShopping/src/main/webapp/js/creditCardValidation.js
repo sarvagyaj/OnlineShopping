@@ -4,6 +4,8 @@ $(document).ready(function() {
 		$(".to-hide").show();
 		setAction();
 	});
+	
+	
 });
 
 function setAction() {
@@ -20,3 +22,9 @@ $("#form").validate({
 		}
 	}
 });
+
+function pay() {
+	$(".to-hide").show();
+	$("#form").show();
+	setAction();
+}

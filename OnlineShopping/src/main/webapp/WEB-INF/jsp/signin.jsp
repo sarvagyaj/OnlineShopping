@@ -44,11 +44,11 @@
 </head>
 
 <body onload="myFunction()" id="page-top" class="index">
-<input type="hidden" id="firstName" value="${it.user.firstName}">
+	<input type="hidden" id="firstName" value="${it.user.firstName}">
 	<input type="hidden" id="isAdmin" value="${it.user.isAdmin}">
-	<input type="hidden" id="email" value="${it.user.email}">	
+	<input type="hidden" id="email" value="${it.user.email}">
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header page-scroll">
@@ -58,8 +58,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand page-scroll" href="./">Shop
-					Online</a>
+				<a class="navbar-brand page-scroll" href="./">Shop Online</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,17 +70,20 @@
 						href="addProduct">Add Product</a></li>
 					<li class="admin-menu"><a class="page-scroll"
 						href="addCatalog">Add Catalog</a></li>
+					<li><a class="page-scroll" href="store">View Store</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCart?user_id=sarva" id="cart">My Shopping Cart</a></li>
 					<li class="login"><a class="page-scroll"
 						href="viewCartHistory?user_id=sarva" id="history">View History</a></li>
 					<li class="not-login"><a class="page-scroll" href="signin">Sign
 							In / Sign Up</a></li>
-					<li class="login" onclick=signout()><a class="page-scroll" >Sign
+					<li class="login" onclick=signout()><a class="page-scroll">Sign
 							Out</a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><a class="page-scroll" ></a></li>
-					<li class="login"><h4 class="section-subheading text-muted"><div id="userName"></div></h4></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><a class="page-scroll"></a></li>
+					<li class="login"><h4 class="section-subheading text-muted">
+							<div id="userName"></div>
+						</h4></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -101,8 +103,10 @@
 							<div class="col-lg-12 text-center">
 								<h2 class="section-heading">Sign In</h2>
 								<h3 class="section-subheading text-muted">
-									<div id="line"> If you are not registered, click here to <a href="signup">Register</a>
-								</div></h3>
+									<div id="line">
+										If you are not registered, click here to <a href="signup">Register</a>
+									</div>
+								</h3>
 								<h4>${it.statement}</h4>
 							</div>
 							<hr>
