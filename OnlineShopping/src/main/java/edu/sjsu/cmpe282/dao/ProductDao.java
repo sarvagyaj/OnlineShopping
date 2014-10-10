@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
@@ -28,6 +29,8 @@ public class ProductDao {
 				.getClient();
 
 		try {
+			//AtomicInteger productId
+			
 			Map<String, AttributeValue> item = new HashMap<String, AttributeValue>();
 
 			item.put("catalog_name",

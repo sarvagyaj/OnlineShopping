@@ -47,6 +47,7 @@
 	<input type="hidden" id="firstName" value="${it.user.firstName}">
 	<input type="hidden" id="isAdmin" value="${it.user.isAdmin}">
 	<input type="hidden" id="email" value="${it.user.email}">
+	
 
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">

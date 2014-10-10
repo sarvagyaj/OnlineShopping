@@ -1,5 +1,6 @@
 package edu.sjsu.cmpe282.resources;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class WelcomeResource {
 		map.put("user", user);
 		
 		if(user!= null) {
-			map.put("statement", "Welcome "+user.getFirstName()+". Have fun shopping!! " );			
+			map.put("statement", "Welcome "+user.getFirstName()+". Your last login time was "+user.getLastLoginTime() );			
 		} else {
 			map.put("statement", "Incorrect username/password" );	
 		}
@@ -59,18 +60,7 @@ public class WelcomeResource {
 	}
 
 	
-/*	@POST
-	@Path("signin")
-	@Produces(MediaType.APPLICATION_JSON)
-	public User signIn(@FormParam("userid") String userid,
-			@FormParam("password") String password) {
-		UserResource userResource = new UserResource();
-		User user = userResource.signIn(userid, password);
-		
-		return user;
-	}*/
 
-	
 	@GET
 	@Path("signup")
 	@Produces("text/html")
@@ -85,14 +75,14 @@ public class WelcomeResource {
 			@FormParam("lastName") String lastName,
 			@FormParam("email") String userid,
 			@FormParam("password") String password) {
-		User user = new User(firstName, lastName, userid, password,(short)0);
+		User user = new User(firstName, lastName, userid, password,(short)0, new Date(System.currentTimeMillis()));
 		UserResource userResource = new UserResource();
 		User user1 = userResource.signUp(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user1);
 		
 		if(user1!= null) {
-			map.put("statement", "You are succesfully registered, "+user1.getFirstName()+"" );			
+			map.put("statement", "You are succesfully registered, "+user1.getFirstName()+" !!" );			
 		} else {
 			map.put("statement", "Email already exist. Please try again with another email id." );	
 		}
@@ -100,22 +90,7 @@ public class WelcomeResource {
 
 	}
 	
-	/*@POST
-	@Path("signup")
-	@Produces("text/html")
-	public Response signUp(@FormParam("firstName") String firstName,
-			@FormParam("lastName") String lastName,
-			@FormParam("email") String userid,
-			@FormParam("password") String password) {
-		User user = new User(firstName, lastName, userid, password,(short)0);
-		UserResource userResource = new UserResource();
-		User user1 = userResource.signUp(user);
-		if(user1!= null) {
-			return Response.ok(new Viewable("/index", user1)).build();
-		}
-		return Response.ok(new Viewable("/signup",  "Incorrect information. Please try again.")).build();
-	}
-	*/
+
 	@GET
 	@Path("signout")
 	@Produces(MediaType.APPLICATION_JSON)

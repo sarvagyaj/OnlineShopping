@@ -105,7 +105,7 @@
 							<h4>${it}</h4>
 							<hr>
 
-							<form id="form" method="post" action="addProduct">
+							<form id="myform" method="post" action="addProduct">
 								<div class="top-margin">
 									<label>Catalog Name</label> <select required name="catalogName"
 										id="catalogName" class="form-control">
@@ -120,12 +120,12 @@
 										name="desc" class="form-control">
 								</div>
 								<div class="top-margin">
-									<label>Price</label> <input type="text" required name="price"
+									<label>Price</label> <input type="number" required name="price"
 										class="form-control">
 								</div>
 
 								<div class="top-margin">
-									<label>Quantity</label> <input type="text" required
+									<label>Quantity</label> <input type="number" required
 										name="quantity" class="form-control">
 								</div>
 

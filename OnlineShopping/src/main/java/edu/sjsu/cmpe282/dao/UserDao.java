@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 import edu.sjsu.cmpe282.constants.Constants;
 import edu.sjsu.cmpe282.database.MySQLConnection;
@@ -18,17 +19,17 @@ public class UserDao {
 
 	public boolean addUser(User user) {
 		try {
-			if(!validateEmail(user.getEmail())) {
+			if (!validateEmail(user.getEmail())) {
 				return false;
 			}
 			connection = MySQLConnection.getInstance().getConnection();
 			statement = connection.createStatement();
 			String query = "INSERT INTO `"
 					+ Constants.SCHEMA_NAME
-					+ "`.`user` (`first_name`, `last_name`, `email_id`, `password`,`is_admin`) VALUES ('"
+					+ "`.`user` (`first_name`, `last_name`, `email_id`, `password`,`is_admin`,`last_login_time`) VALUES ('"
 					+ user.getFirstName() + "', '" + user.getLastName()
 					+ "', '" + user.getEmail() + "', '" + user.getPassword()
-					+ "','0');";
+					+ "','0','"+System.currentTimeMillis()+"');";
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -36,16 +37,36 @@ public class UserDao {
 		return true;
 	}
 
-	public boolean login(String userid, String password) {
+	public long login(String userid, String password) {
+		long lastLoginTime=0L;
 		if (validatePassword(userid, password)) {
-			return true;
+			connection = MySQLConnection.getInstance().getConnection();
+			try {
+				statement = connection.createStatement();
+				preparedStatement = connection
+						.prepareStatement("Select last_login_time from `"
+								+ Constants.SCHEMA_NAME
+								+ "`.`user` where email_id=?");
+				preparedStatement.setString(1, userid);
+				resultSet = preparedStatement.executeQuery();
+
+				resultSet.next();
+				lastLoginTime = resultSet.getLong("last_login_time");
+				
+				String query = "UPDATE `" + Constants.SCHEMA_NAME
+						+ "`.`user` SET `last_login_time` ='"
+						+ System.currentTimeMillis() + "' where `email_id`='"+userid+"';";
+				statement.executeUpdate(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return lastLoginTime;
 		}
-		return false;
+		return -1L;
 
 	}
 
 	public boolean validateEmail(String userid) {
-		String emailId = null;
 		try {
 			connection = MySQLConnection.getInstance().getConnection();
 			preparedStatement = connection
@@ -55,17 +76,17 @@ public class UserDao {
 			preparedStatement.setString(1, userid);
 			resultSet = preparedStatement.executeQuery();
 
-			if(!resultSet.next()){
+			if (!resultSet.next()) {
 				return true;
 			}
-						
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
-		
+
 	public boolean validatePassword(String userid, String password) {
 		String originalPassword = null;
 		try {
@@ -108,7 +129,7 @@ public class UserDao {
 		return firstName;
 	}
 
-	public User getUser(String userid) {
+	public User getUser(String userid, long time) {
 		User user = null;
 		try {
 			connection = MySQLConnection.getInstance().getConnection();
@@ -123,7 +144,8 @@ public class UserDao {
 			user = new User(resultSet.getString("first_name"),
 					resultSet.getString("last_name"), userid,
 					resultSet.getString("password"),
-					resultSet.getShort("is_admin"));
+					resultSet.getShort("is_admin"),
+					new Date(time));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

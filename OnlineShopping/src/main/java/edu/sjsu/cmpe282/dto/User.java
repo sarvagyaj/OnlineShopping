@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe282.dto;
 
+import java.util.Date;
+
 public class User {
 	
 	private String firstName;
@@ -7,16 +9,18 @@ public class User {
 	private String email;
 	private String password;
 	private short isAdmin;
+	private Date lastLoginTime;
 		
 	public User() {
 		}
 	
-	public User(String firstName, String lastName, String email, String passwd, short isAdmin) {
+	public User(String firstName, String lastName, String email, String passwd, short isAdmin, Date lastLoginTime) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = passwd;
 		this.isAdmin = isAdmin;
+		this.lastLoginTime = lastLoginTime;
 	}
 
 	public String getFirstName() {
@@ -49,6 +53,11 @@ public class User {
 	public void setIsAdmin(short isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
 	
 }

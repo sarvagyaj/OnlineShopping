@@ -47,6 +47,7 @@
 	<input type="hidden" id="firstName" value="${it.user.firstName}">
 	<input type="hidden" id="isAdmin" value="${it.user.isAdmin}">
 	<input type="hidden" id="email" value="${it.user.email}">
+	
 
 	<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
 		<div class="container">
@@ -111,7 +112,7 @@
 							<form id="form" method="post" action="signup">
 								<div class="top-margin">
 									<label>First Name</label> <input type="text" name="firstName"
-										class="form-control">
+										class="form-control" required>
 								</div>
 								<div class="top-margin">
 									<label>Last Name</label> <input type="text" name="lastName"

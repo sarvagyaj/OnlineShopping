@@ -105,7 +105,7 @@
 							<h4>${it}</h4>
 							<hr>
 
-							<form id="form" method="post" action="addCatalog">
+							<form id="myform" method="post" action="addCatalog">
 								<div class="top-margin">
 									<label>Catalog Name</label> <input type="text"
 										name="catalogName" class="form-control">
