@@ -26,7 +26,7 @@ public class MySQLConnection {
 		if (connection == null) {
 			synchronized (MySQLConnection.class) {
 				if (connection == null) {
-					connection = new MySQLConnection("jdbc/db");
+					connection = new MySQLConnection("jdbc/rds");
 				}
 			}
 		}

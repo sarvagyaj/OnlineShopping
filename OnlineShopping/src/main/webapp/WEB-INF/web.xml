@@ -35,5 +35,10 @@
 		<resource-env-ref-name>jdbc/db</resource-env-ref-name>
 		<resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
 	</resource-env-ref>
+	
+	<resource-env-ref>
+		<resource-env-ref-name>jdbc/rds</resource-env-ref-name>
+		<resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
+	</resource-env-ref>
 
 </web-app>

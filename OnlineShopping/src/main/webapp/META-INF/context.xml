@@ -8,4 +8,12 @@
         driverClassName="com.mysql.jdbc.Driver"
         username="root" password="root"
     />
+
+    <Resource
+        name="jdbc/rds" type="javax.sql.DataSource"
+        maxActive="100" maxIdle="30" maxWait="10000" 
+        url="jdbc:mysql://onlineshopping.cxqha4flqwtm.us-west-1.rds.amazonaws.com:3306/online_shopping_db"
+        driverClassName="com.mysql.jdbc.Driver"
+        username="root" password="12345678"
+    />
 </Context>
